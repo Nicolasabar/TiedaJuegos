@@ -1,0 +1,54 @@
+﻿@model TiendaJuegos.Models.Venta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Generar venta</h1>
+
+<h4>Venta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="VendedorId" class="control-label">Nombre vendedor</label>
+                <select asp-for="VendedorId" class="form-control" asp-items="ViewBag.VendedorId"></select>
+            </div>
+
+            <div class="form-group" id="productos-container">
+                <label>Productos</label>
+                <select class="form-control" asp-items="ViewBag.Productos" name="Productos" multiple></select>
+                <input type="number" class="form-control" placeholder="Cantidad" name="Cantidades" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MontoTotal" class="control-label">Monto total</label>
+                <input asp-for="MontoTotal" class="form-control" readonly />
+                <span asp-validation-for="MontoTotal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Ingresar venta" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function agregarProducto() {
+            var container = document.getElementById('productos-container');
+            var productoDiv = document.querySelector('.producto').cloneNode(true);
+            container.appendChild(productoDiv);
+        }
+    </script>
+</div>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

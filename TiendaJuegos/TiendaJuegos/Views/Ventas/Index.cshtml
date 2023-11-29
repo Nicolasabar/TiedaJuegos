@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TiendaJuegos.Models.Venta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de ventas</h1>
+
+<p>
+    <a asp-action="Create">Crear venta</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Productos vendidos
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Fecha compra
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendedor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductosVendidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCompra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendedor.Nombres)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
